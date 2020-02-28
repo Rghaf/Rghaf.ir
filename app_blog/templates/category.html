@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+{% load thumbnail %}
+{% load jalali_tags %}
+
+{% block content %}
+<br>
+
+<div class="container">
+  <div class="card">
+    <div class="card-body">
+      <h1 class="text-center card-title">{{ Category.title }}</h1>
+      <p class="text-center card-text">{{ Category.description }}</p>
+      
+    </div>
+</div>
+<br>
+
+{% for post in Posts %}
+  <div class="container">
+    <div class="row">
+        <div class="col-sm-12 col-md-12">
+            <div class="media">
+              <div class="media-body">
+                <h3 class="mt-0 mb-1"><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></h3>
+                <p>
+                  {{ post.summary }}
+                </p>
+              </div>
+              {% if post.image %}
+                {% thumbnail post.image "280x186" as im %}
+                  <img src="{{ im.url }}" class="rounded float-right align-self-start" alt="...">
+                {% endthumbnail %}
+              {% else %}
+                <img class="responsive-img" src="{{ post.img_404 }}" style="width: 280px">
+              {% endif %}
+            </div>
+            {% if not  forloop.last %}
+              <hr class="new1">  
+            {% endif %}
+        </div>
+    </div>
+  </div>
+{% endfor %}
+
+<!-- paginator -->
+{% if Posts.has_other_pages %}
+  <nav aria-label="Page navigation example">
+    <ul class="pagination justify-content-center">
+      {% if Posts.has_previous %}
+        <li class="page-item">
+          <a class="page-link" href="?page={{ Posts.previous_page_number }}" aria-label="Previous">
+            <span aria-hidden="true">&laquo;</span>
+          </a>
+        </li>
+      {% else %}
+        <li class="page-link disabled" aria-label="Previous"><span>&laquo;</span></li>
+      {% endif %}
+      {% for i in Posts.paginator.page_range %}
+        {% if Posts.number == i %}
+          <li class="page-item active" aria-current="page">
+            <a class="page-link" href="#">{{ i }}<span class="sr-only">(current)</span></a>
+          </li>
+        {% else %}
+          <li class="page-item"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+        {% endif %}
+      {% endfor %}
+      {% if Posts.has_next %}
+        <li class="page-item"><a class="page-link" href="?page={{ Posts.next_page_number }}">&raquo;</a></li>
+      {% else %}
+        <li class="page-item disabled"><span class="page-link">&raquo;</span></li>
+      {% endif %}
+    </ul>
+  </nav>
+{% endif %}
+
+{% endblock content %}
+    

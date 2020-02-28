@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% load thumbnail %}
+
+
+{% block content %}
+{% thumbnail Post.image "1905x762" as im%}
+  <img src="{{ im.url }}" class="d-block w-100 blur_img" alt="Responsive image">
+{% endthumbnail %}
+<br>
+<div class="container">
+  <h1 class="text-center"> {{ Post.title }} </h1>
+    <div class="row">
+      <div class="col-sm-6 col-md-6">
+          <h4 class="text-right"> {{ Post.category }} </h4>
+      </div>
+      <div class="col-sm-6 col-md-6">
+          <h4 class="text-left"> {{ Post.jd_date }} </h4>
+      </div>
+      
+      {% with Post as post %}
+        {% include 'components/share.html' %}
+      {% endwith %}
+      
+    </div>
+    <hr class="new1">
+    <p>{{ Post.main_content|safe }} </p>
+    <hr class="new1">
+    <!--suggets-->
+    <h4 class="text-center">مطالب پیشنهادی</h4>
+    <div class="row">
+      {% for post in Sug|slice:"0:3" %}
+        <div class="col-sm-12 col-md-4">
+          <div class="card" style="width: 18rem;">
+            {% thumbnail post.image "286x180" as im%}
+              <img class="card-img-top" src=" {{ im.url }}" alt="Card image cap">
+            {% endthumbnail %}
+            <div class="card-body">
+              <h5 class="card-title">{{ post.title }}</h5>
+              <p class="card-text">{{ post.summary }}</p>
+            </div>
+            <div class="card-body">
+              <a href="#" class="card-link">ادامه مطلب</a>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+</div>
+
+
+
+
+{% endblock content %}
+    

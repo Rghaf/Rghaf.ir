@@ -1,0 +1,26 @@
+{% load social_share %}
+
+{% post_to_telegram post.summary post.get_absolute_url 'Telegram' %}
+
+<a href="whatsapp://send?text=post.title : post.get_absolute_url " data-action="share/whatsapp/share">Share via Whatsapp</a>
+
+{% post_to_twitter post.summary post.get_absolute_url 'twitter' %}
+
+{% send_email post.title post.summary post.get_absolute_url 'email' %}
+
+{% post_to_facebook 'http://baziato.com' 'hello world!!!' %}
+
+{% post_to_linkedin post.title post.get_absolute_url 'linkedin' %}
+
+
+
+
+
+{% comment %}
+    
+{% post_to_facebook 'http://baziato.com' 'hello world!!!' %}
+{% post_to_gplus 'http://baziato.com' 'hello world!!!' %}
+{% post_to_mail 'email_subject' 'text_to_post' 'http://baziato.com' 'hello world!!!' %}
+{% post_to_reddit 'text_to_post' 'http://baziato.com' 'hello world!!!' %}
+
+{% endcomment %}
