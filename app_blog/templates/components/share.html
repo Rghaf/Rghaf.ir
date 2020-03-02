@@ -1,26 +1,39 @@
 {% load social_share %}
 
-{% post_to_telegram post.summary post.get_absolute_url 'Telegram' %}
-
-<a href="whatsapp://send?text=post.title : post.get_absolute_url " data-action="share/whatsapp/share">Share via Whatsapp</a>
-
-{% post_to_twitter post.summary post.get_absolute_url 'twitter' %}
-
-{% send_email post.title post.summary post.get_absolute_url 'email' %}
-
-{% post_to_facebook 'http://baziato.com' 'hello world!!!' %}
-
-{% post_to_linkedin post.title post.get_absolute_url 'linkedin' %}
-
-
-
-
-
 {% comment %}
     
+{% post_to_linkedin post.title post.get_absolute_url 'linkedin' %}
 {% post_to_facebook 'http://baziato.com' 'hello world!!!' %}
 {% post_to_gplus 'http://baziato.com' 'hello world!!!' %}
 {% post_to_mail 'email_subject' 'text_to_post' 'http://baziato.com' 'hello world!!!' %}
 {% post_to_reddit 'text_to_post' 'http://baziato.com' 'hello world!!!' %}
 
 {% endcomment %}
+
+
+  <!-- The Modal -->
+  <div class="modal" id="myModal" dir="rtl">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title">اشتراک گذاری در:</h4>
+        </div>
+        <!-- Modal body -->
+        <div class="modal-body text-center">
+          <!--<i class="fab fa-github"></i>
+          <i class="fab fa-instagram"></i>-->
+          <span style="display: inline-block;">{% post_to_telegram post.title post.get_absolute_url '<i class="fab fa-telegram modal-icon"></i>' %}</span>
+          <span style="display: inline-block;"><a class="fab fa-whatsapp text-success modal-icon" href="whatsapp://send?text={{ post.title }} : {{ post.get_absolute_url }}" data-action="share/whatsapp/share"></a></span>
+          <span style="display: inline-block;">{% post_to_twitter post.title post.get_absolute_url '<i class="fab fa-twitter modal-icon"></i>' %}</span>
+          <span style="display: inline-block;">{% send_email post.title post.title post.get_absolute_url '<i class="fas fa-envelope text-dark modal-icon"></i>' %}</a></span>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-dismiss="modal">بستن</button>
+        </div>
+        </div>     
+      </div>
+    </div>
+  </div>
+
+  

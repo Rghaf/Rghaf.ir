@@ -1,54 +1,66 @@
 {% extends 'base.html' %}
 {% load thumbnail %}
+{% load social_share %}
 
 
 {% block content %}
-{% thumbnail Post.image "1905x762" as im%}
-  <img src="{{ im.url }}" class="d-block w-100 blur_img" alt="Responsive image">
-{% endthumbnail %}
-<br>
-<div class="container">
-  <h1 class="text-center"> {{ Post.title }} </h1>
-    <div class="row">
-      <div class="col-sm-6 col-md-6">
-          <h4 class="text-right"> {{ Post.category }} </h4>
+  
+  <div class="block-img">
+    {% if Post.image %}
+      {% thumbnail Post.image "1905x762" as im%}
+        <img src="{{ im.url }}" class="post-img" alt="Notebook">
+      {% endthumbnail %}
+    {% else %}
+      <img class="responsive-img" src="{{ Post.img_404 }}" style="width: 1200px;">
+    {% endif %}
+      <div class="content text-center">
+        <h1>{{ Post.title }}</h1>
+        <a href="#" class="fas fa-folder detail-icon" dir="rtl"> {{ Post.category }} </a>
+        <i href="#" class="far fa-calendar-alt detail-icon" dir="rtl"> {{ Post.jd_date }} </i>
+        <a href="#" class="fa fa-share-alt detail-icon" dir="rtl" data-toggle="modal" data-target="#myModal"> اشتراک گذاری</a>
       </div>
-      <div class="col-sm-6 col-md-6">
-          <h4 class="text-left"> {{ Post.jd_date }} </h4>
+    
+  </div>
+  <br>
+
+  {% with Post as post %}
+    {% include 'components/share.html' %}
+  {% endwith %}
+
+  <div class="container">
+    <div class="card block-txt">
+      <div class="card-body">
+        <p>{{ Post.main_content|safe }} </p>
       </div>
-      
-      {% with Post as post %}
-        {% include 'components/share.html' %}
-      {% endwith %}
-      
     </div>
-    <hr class="new1">
-    <p>{{ Post.main_content|safe }} </p>
-    <hr class="new1">
-    <!--suggets-->
-    <h4 class="text-center">مطالب پیشنهادی</h4>
+    {% if Post.dl_btn %}
+    <br>
+    <div class="text-center">
+      <h4>دانلود فایل‌ها:</h4>
+      <a href="{{ Post.dl_btn }}" class="btn btn-primary btn-lg active" role="button">دانلود</a>
+    </div>
+    
+    {% endif %}   
+    <h1 class="new text-center">مطالب پیشنهادی</h1>
+    <hr class="my">
     <div class="row">
       {% for post in Sug|slice:"0:3" %}
-        <div class="col-sm-12 col-md-4">
-          <div class="card" style="width: 18rem;">
-            {% thumbnail post.image "286x180" as im%}
-              <img class="card-img-top" src=" {{ im.url }}" alt="Card image cap">
-            {% endthumbnail %}
-            <div class="card-body">
-              <h5 class="card-title">{{ post.title }}</h5>
-              <p class="card-text">{{ post.summary }}</p>
-            </div>
-            <div class="card-body">
-              <a href="#" class="card-link">ادامه مطلب</a>
-            </div>
+       <div class="col-sm-12 col-md-4">
+        <div class="card">
+          {% thumbnail post.image "286x180" as im%}
+            <img src="{{ im.url }}" class="img-fluid" alt="...">
+          {% endthumbnail %}
+          <div class="card-body">
+            <h5 class="card-title"> {{ post.title }} </h5>
+            <p class="card-text"> {{ post.summary }} </p>
+          </div>
+          <div class="card-body">
+            <a href="{{ post.get_absolute_url }}" class="card-link">card-link</a>
           </div>
         </div>
-      {% endfor %}
+       </div>
+      {% endfor  %}
     </div>
-</div>
-
-
-
-
+  </div>
+  
 {% endblock content %}
-    

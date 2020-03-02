@@ -4,20 +4,29 @@
 
 {% block content %}
 <br>
-
+<br>
+<br>
+<br>
 <div class="container">
   <div class="card">
     <div class="card-body">
       <h1 class="text-center card-title">{{ Category.title }}</h1>
-      <p class="text-center card-text">{{ Category.description }}</p>
-      
+      <div class="text-center card-text">
+        <p>{{ Category.description }}</p>
+        <a href="#" class="fa fa-share-alt text-primary detail-icon" dir="rtl" data-toggle="modal" data-target="#myModal"> اشتراک گذاری</a>
+      </div>
     </div>
 </div>
 <br>
 
+{% with Category as post %}
+  {% include 'components/share.html' %}
+{% endwith %}
+
 {% for post in Posts %}
   <div class="container">
-    <div class="row">
+    <div class="card">
+      <div class="row">
         <div class="col-sm-12 col-md-12">
             <div class="media">
               <div class="media-body">
@@ -34,11 +43,10 @@
                 <img class="responsive-img" src="{{ post.img_404 }}" style="width: 280px">
               {% endif %}
             </div>
-            {% if not  forloop.last %}
-              <hr class="new1">  
-            {% endif %}
         </div>
+      </div>
     </div>
+    <br>
   </div>
 {% endfor %}
 

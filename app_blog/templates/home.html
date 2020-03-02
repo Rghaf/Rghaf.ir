@@ -4,71 +4,45 @@
 
   
   {% block content %}
-    <main role="main">
-        <!-- slider -->
-        <div id="carouselExampleFade" class="carousel slide carousel-fade" data-ride="carousel">
-           <ol class="carousel-indicators">
-              <li data-target="#carouselExampleCaptions" data-slide-to="0" class="active"></li>
-              <li data-target="#carouselExampleCaptions" data-slide-to="1"></li>
-              <li data-target="#carouselExampleCaptions" data-slide-to="2"></li>
-            </ol>  
-            {% for slide in Slider|slice:":4" %}
-              <div class="carousel-inner"> 
-                <div class="carousel-item {% if forloop.first %} active {% endif %}" data-interval="2000">
-                  {% if slide.image %}
-                    {% thumbnail slide.image "1905x512" as im %}
-                        <a href="{{ slide.url }}">
-                          <img src="{{ im.url }}" class="d-block w-100" alt="...">
-                        </a>
-                    {% endthumbnail %}
-                  {% else %}
-                    <img class="responsive-img" src="{{ slide.img_404 }}" style="width: 512px">
-                  {% endif %}
-                      <div class="carousel-caption d-none d-md-block">
-                        <h4>{{ slide.description }}</h4>
-                      </div>
-              </div > 
-            {% endfor %}
-            <a class="carousel-control-prev" href="#carouselExampleFade" role="button" data-slide="prev">
-              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-              <span class="sr-only">Previous</span>
-            </a>
-            <a class="carousel-control-next" href="#carouselExampleFade" role="button" data-slide="next">
-              <span class="carousel-control-next-icon" aria-hidden="true"></span>
-              <span class="sr-only">Next</span>
-            </a>
-        </div>
-
-        <!-- main -->
-        <br>
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-12 col-md-12">
-                  {% for post in Post|slice:":5" %}
-                    <div class="media">
-                      <div class="media-body">
-                        <h3 class="mt-0 mb-1"><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></h3>
-                        <p>
-                          {{ post.summary }}
-                        </p>
-                      </div>
-                      
-                      {% if post.image %}
-                        {% thumbnail post.image "280x186" as im %}
-                          <img src="{{ im.url }}" class="rounded float-right align-self-start" alt="...">
-                        {% endthumbnail %}
-                      {% else %}
-                         <img class="responsive-img" src="{{ post.img_404 }}" style="width: 280px">
-                      {% endif %}
-                        
-                    </div>
-                    {% if not  forloop.last %}
-                      <hr class="new1">  
-                    {% endif %}
-                  {% endfor %}
-                </div>
+  <!-- main -->
+<br>
+<br>
+<br>
+<br>
+<div class="container">
+  <div class="card text-center">
+    <h1>به بلاگ شخصی من خوش اومدید :))</h1>
+    <br>
+    <p>نسخه آزمایشی(ورژن 0.2)</p>
+  </div>
+  <br>
+    <div class="row">
+        <div class="col-sm-12 col-md-12">
+          {% for post in Post|slice:":5" %}
+           <div class="card">
+            <div class="media">
+              <div class="media-body">
+                <h3 class="mt-0 mb-1"><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></h3>
+                <p>
+                  {{ post.summary }}
+                </p>
+              </div>
+              
+              {% if post.image %}
+                {% thumbnail post.image "280x186" as im %}
+                  <img src="{{ im.url }}" class="rounded float-right align-self-start" alt="...">
+                {% endthumbnail %}
+              {% else %}
+                 <img class="responsive-img" src="{{ post.img_404 }}" style="width: 280px">
+              {% endif %}
             </div>
+           </div>
+            {% if not  forloop.last %}
+              <br>  
+            {% endif %}
+          {% endfor %}
         </div>
-    </main>
+    </div>
+</div>
   
   {% endblock content %}

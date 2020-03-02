@@ -26,6 +26,7 @@ SECRET_KEY = 'e9=9qmxq-lipc!zfhvgcw-=vks45r^05=s_=z$8qta@c-7fjy5'
 DEBUG = True
 
 ALLOWED_HOSTS = ["rghafblog-rghaf.fandogh.cloud"]
+#['198.211.99.20', 'localhost', '127.0.0.1'] ["rghafblog-rghaf.fandogh.cloud"]
 
 
 # Application definition
