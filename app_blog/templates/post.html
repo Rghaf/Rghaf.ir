@@ -5,9 +5,9 @@
 
 {% block content %}
   
-  <div class="block-img">
+  <div class="block-img text-center">
     {% if Post.image %}
-      {% thumbnail Post.image "1905x762" as im%}
+      {% thumbnail Post.image "1905x762" crop="center" as im%}
         <img src="{{ im.url }}" class="post-img" alt="Notebook">
       {% endthumbnail %}
     {% else %}
@@ -39,23 +39,26 @@
       <h4>دانلود فایل‌ها:</h4>
       <a href="{{ Post.dl_btn }}" class="btn btn-primary btn-lg active" role="button">دانلود</a>
     </div>
-    
     {% endif %}   
     <h1 class="new text-center">مطالب پیشنهادی</h1>
     <hr class="my">
     <div class="row">
       {% for post in Sug|slice:"0:3" %}
        <div class="col-sm-12 col-md-4">
-        <div class="card">
-          {% thumbnail post.image "286x180" as im%}
-            <img src="{{ im.url }}" class="img-fluid" alt="...">
-          {% endthumbnail %}
+        <div class="card text-center">
+          {% if post.image %}
+            {% thumbnail post.image "286x180" crop="center" as im%}
+              <img src="{{ im.url }}" class="img-fluid" alt="...">
+            {% endthumbnail %}
+          {% else %}
+            <img class="responsive-img" src="{{ Post.img_404 }}" style="width: 286px;">
+          {% endif %}
           <div class="card-body">
             <h5 class="card-title"> {{ post.title }} </h5>
             <p class="card-text"> {{ post.summary }} </p>
           </div>
           <div class="card-body">
-            <a href="{{ post.get_absolute_url }}" class="card-link">card-link</a>
+            <a href="{{ post.get_absolute_url }}" class="card-link">مشاهده مطلب</a>
           </div>
         </div>
        </div>

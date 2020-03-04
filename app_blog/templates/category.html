@@ -16,70 +16,75 @@
         <a href="#" class="fa fa-share-alt text-primary detail-icon" dir="rtl" data-toggle="modal" data-target="#myModal"> اشتراک گذاری</a>
       </div>
     </div>
+  </div>
 </div>
 <br>
 
-{% with Category as post %}
-  {% include 'components/share.html' %}
-{% endwith %}
+  {% with Category as post %}
+    {% include 'components/share.html' %}
+  {% endwith %}
 
-{% for post in Posts %}
-  <div class="container">
+<div class="container">
+  {% for post in Posts %}
     <div class="card">
-      <div class="row">
-        <div class="col-sm-12 col-md-12">
-            <div class="media">
-              <div class="media-body">
-                <h3 class="mt-0 mb-1"><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></h3>
-                <p>
-                  {{ post.summary }}
-                </p>
-              </div>
+      <div class="media">
+        <div class="media-body">
+          <div class="row">
+            <div class="text-center col-sm-12 col-md-4">
               {% if post.image %}
-                {% thumbnail post.image "280x186" as im %}
-                  <img src="{{ im.url }}" class="rounded float-right align-self-start" alt="...">
+                {% thumbnail post.image "280x186" crop="center" as im %}
+                 <img src="{{ im.url }}">
                 {% endthumbnail %}
               {% else %}
                 <img class="responsive-img" src="{{ post.img_404 }}" style="width: 280px">
               {% endif %}
             </div>
+            <div class="col-sm-12 col-md-8">
+              <h3 class="mt-0 mb-1"><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></h3>
+              <p>
+                {{ post.summary }}
+              </p>
+            </div>
+          </div>
         </div>
       </div>
     </div>
-    <br>
-  </div>
-{% endfor %}
+    {% if not  forloop.last %}
+    <br>  
+    {% endif %}
+  {% endfor %}
+</div>
 
-<!-- paginator -->
-{% if Posts.has_other_pages %}
-  <nav aria-label="Page navigation example">
-    <ul class="pagination justify-content-center">
-      {% if Posts.has_previous %}
-        <li class="page-item">
-          <a class="page-link" href="?page={{ Posts.previous_page_number }}" aria-label="Previous">
-            <span aria-hidden="true">&laquo;</span>
-          </a>
-        </li>
-      {% else %}
-        <li class="page-link disabled" aria-label="Previous"><span>&laquo;</span></li>
-      {% endif %}
-      {% for i in Posts.paginator.page_range %}
-        {% if Posts.number == i %}
-          <li class="page-item active" aria-current="page">
-            <a class="page-link" href="#">{{ i }}<span class="sr-only">(current)</span></a>
+  <!-- paginator -->
+  {% if Posts.has_other_pages %}
+    <nav aria-label="Page navigation example">
+      <ul class="pagination justify-content-center">
+        {% if Posts.has_previous %}
+          <li class="page-item">
+            <a class="page-link" href="?page={{ Posts.previous_page_number }}" aria-label="Previous">
+              <span aria-hidden="true">&laquo;</span>
+            </a>
           </li>
         {% else %}
-          <li class="page-item"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+          <li class="page-link disabled" aria-label="Previous"><span>&laquo;</span></li>
         {% endif %}
-      {% endfor %}
-      {% if Posts.has_next %}
-        <li class="page-item"><a class="page-link" href="?page={{ Posts.next_page_number }}">&raquo;</a></li>
-      {% else %}
-        <li class="page-item disabled"><span class="page-link">&raquo;</span></li>
-      {% endif %}
-    </ul>
-  </nav>
-{% endif %}
+        {% for i in Posts.paginator.page_range %}
+          {% if Posts.number == i %}
+            <li class="page-item active" aria-current="page">
+              <a class="page-link" href="#">{{ i }}<span class="sr-only">(current)</span></a>
+            </li>
+          {% else %}
+            <li class="page-item"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+          {% endif %}
+        {% endfor %}
+        {% if Posts.has_next %}
+          <li class="page-item"><a class="page-link" href="?page={{ Posts.next_page_number }}">&raquo;</a></li>
+        {% else %}
+          <li class="page-item disabled"><span class="page-link">&raquo;</span></li>
+        {% endif %}
+      </ul>
+    </nav>
+  {% endif %}
 
 {% endblock content %}
     

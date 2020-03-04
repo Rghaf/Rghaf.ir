@@ -4,31 +4,38 @@
 
 {% block content %}
 <br>
+<br>
+<br>
+<br>
 <div class="container">
-    <div class="row">
-        <div class="col-sm-12 col-md-12">
-          {% for post in Posts %}
-            <div class="media">
-              <div class="media-body">
-                <h3 class="mt-0 mb-1"><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></h3>
-                <p>
-                  {{ post.summary }}
-                </p>
-              </div>
+  {% for post in Posts %}
+    <div class="card">
+      <div class="media">
+        <div class="media-body">
+          <div class="row">
+            <div class="text-center col-sm-12 col-md-4">
               {% if post.image %}
-                {% thumbnail post.image "280x186" as im %}
-                  <img src="{{ im.url }}" class="rounded float-right align-self-start" alt="...">
+                {% thumbnail post.image "280x186" crop="center" as im %}
+                 <img src="{{ im.url }}">
                 {% endthumbnail %}
               {% else %}
-                 <img class="responsive-img" src="{{ post.img_404 }}" style="width: 280px">
+                <img class="responsive-img" src="{{ post.img_404 }}" style="width: 280px">
               {% endif %}
             </div>
-            {% if not  forloop.last %}
-              <hr class="new1">  
-            {% endif %}
-          {% endfor %}
+            <div class="col-sm-12 col-md-8">
+              <h3 class="mt-0 mb-1"><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></h3>
+              <p>
+                {{ post.summary }}
+              </p>
+            </div>
+          </div>
         </div>
+      </div>
     </div>
+    {% if not  forloop.last %}
+    <br>  
+    {% endif %}
+  {% endfor %}
 </div>
 
 <!-- paginator -->
