@@ -25,7 +25,7 @@ SECRET_KEY = 'e9=9qmxq-lipc!zfhvgcw-=vks45r^05=s_=z$8qta@c-7fjy5'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['198.211.99.20', 'localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['rghafblog-rghaf.fandogh.cloud', '198.211.99.20', 'localhost', '127.0.0.1']
 #['198.211.99.20', 'localhost', '127.0.0.1'] ["rghafblog-rghaf.fandogh.cloud"]
 
 

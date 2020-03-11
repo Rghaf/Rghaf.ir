@@ -8,9 +8,10 @@ p, div, h1, h2, h3, h4, h5, h6, a, span, input, button, textarea {
 	direction: rtl;
 }
 
-.my-nav{
-    background-color: rgb(61, 61, 61);
-    margin: 0px !important;
+.my-footer{
+  margin-top: 35px !important;
+  background-color: #212529;
+  color: #f1f1f1;
 }
 
 .post-img{
@@ -79,4 +80,8 @@ h1.new{
 
 #myModal span{
   display: inline-block;
+}
+
+.my-caption {
+   background-color: rgba(0, 0, 0, 0.593);
 }

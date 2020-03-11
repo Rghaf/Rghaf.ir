@@ -5,16 +5,32 @@
   
   {% block content %}
   <!-- main -->
-<br>
-<br>
-<br>
-<br>
+
+ <!-- slider -->
+ <div id="carouselExampleFade" class="carousel slide carousel-fade" data-ride="carousel">  
+     {% for slide in Slider|slice:":4" %}
+       <div class="carousel-inner"> 
+         <div class="carousel-item {% if forloop.first %} active {% endif %}" data-interval="2000">
+           {% if slide.image %}
+             {% thumbnail slide.image "1905x762" crop="center" as im %}
+                 <a href="{{ slide.url }}">
+                   <img src="{{ im.url }}" class="d-block w-100" alt="...">
+                 </a>
+             {% endthumbnail %}
+           {% else %}
+             <img class="responsive-img" src="{{ slide.img_404 }}" style="width: 512px">
+           {% endif %}
+               <div class="carousel-caption d-none d-md-block my-caption">
+                 <h4>{{ slide.description }}</h4>
+               </div>
+         </div>
+       </div > 
+     {% endfor %}
+ </div>
+
+ <br>
+
 <div class="container">
-  <div class="card text-center">
-    <h1>به بلاگ شخصی من خوش اومدید :))</h1>
-    <br>
-    <p>نسخه آزمایشی(ورژن 0.2)</p>
-  </div>
   <br>
   {% for post in Post|slice:":5" %}
     <div class="card">

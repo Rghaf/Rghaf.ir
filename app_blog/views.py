@@ -7,7 +7,7 @@ from app_blog.models import Post, Slider, Category
 def home(requet):
     ctx = {}
     ctx['Post'] = Post.objects.all().order_by("-date")
-    ctx['Slider'] = Slider.objects.all()
+    ctx['Slider'] = Slider.objects.all().order_by("-id")
     return render(requet, 'home.html', ctx)
 
 def post(request, slug):
