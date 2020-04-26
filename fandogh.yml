@@ -1,6 +1,8 @@
 kind: ExternalService
 name: rghafblog
 spec:
+  domains:
+    - name: rghaf.ir
   image_pull_policy: Always
   port: 80
   source:

@@ -23,9 +23,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'e9=9qmxq-lipc!zfhvgcw-=vks45r^05=s_=z$8qta@c-7fjy5'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = ['rghafblog-rghaf.fandogh.cloud', '198.211.99.20', 'localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['rghaf.ir', 'rghafblog-rghaf.fandogh.cloud', '198.211.99.20', 'localhost', '127.0.0.1']
 #['198.211.99.20', 'localhost', '127.0.0.1'] ["rghafblog-rghaf.fandogh.cloud"]
 
 
@@ -41,11 +41,15 @@ INSTALLED_APPS = [
 
     'jalali_date',
     'ckeditor',
+    'ckeditor_uploader',
     'sorl.thumbnail',
     'django_social_share',
 
     'app_blog',
+    'app_resume',
+    'app_donate',
 ]
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -126,10 +130,14 @@ USE_TZ = False
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
+
+
 STATIC_URL = '/static/'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 STATIC_ROOT = BASE_DIR + '/static/'
+CKEDITOR_UPLOAD_PATH = "uploads/"
+CKEDITOR_FILENAME_GENERATOR = 'utils.get_filename'
 
 
 
@@ -137,4 +145,5 @@ STATIC_ROOT = BASE_DIR + '/static/'
 
 SLIDE_404 = STATIC_URL + 'app_blog/IMG/slider-404.png'
 POST_404 = STATIC_URL + 'app_blog/IMG/post-img.jpg'
+
 

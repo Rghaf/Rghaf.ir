@@ -13,7 +13,7 @@ def home(requet):
 def post(request, slug):
     ctx = {}
     ctx['Post'] = Post.objects.get(slug=slug)
-    ctx['Sug'] = Post.objects.all().exclude(slug=slug)
+    ctx['Sug'] = Post.objects.all().order_by("-date").exclude(slug=slug)
     return render(request, 'post.html', ctx)
 
 def archive(request):
@@ -42,5 +42,3 @@ def categoryview(request, slug):
     ctx['Posts'] = posts
     return render(request, 'category.html', ctx)
 
-def resume(request):
-    return render(request, 'resume.html')

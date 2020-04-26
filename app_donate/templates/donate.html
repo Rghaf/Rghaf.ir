@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load thumbnail %}
+
+  
+  {% block content %}
+  <!-- main -->
+<br>
+
+<div class="container">
+  <div class="text-center card">
+    <h1>حمایت مالی</h1>
+    <h5>از طریق این صفحه میتونید از من حمایت مالی کنید.</h5>
+    <br>
+  </div>
+  <br>
+  <div class="text-center card">
+    <br>
+    <h5>
+      {{ Donate.text|safe }}
+    </h5>
+    {% if Donate.link %}
+      <br>
+      <div class="text-center">
+        <h5>حمایت مالی از طریق درگاه زرین پال:</h5>
+        <a href="{{ Donate.link }}" class="btn btn-primary btn-lg active" role="button">حمایت می‌کنم</a>
+      </div>
+      <br>
+    {% endif %} 
+  </div>
+  <br>
+  <div class='text-center card'>
+    <h2>اطلاعات حمایت‌های مالی تا این لحظه:</h2>
+    <br>
+    {% if Donate.need %}
+      <h5>برای پروژه {{ Donate.project }} مبلغ {{ Donate.need }} مورد نیاز است.</h5>
+    {% endif %}
+    <h5>تا این لحظه مبلغ {{ Donate.daonated }} تومان جمع آوری شده است.</h5>  
+  </div>
+</div>
+
+  {% endblock content %}
+
+  <!-- <div class="row">
+    <div class="text-center col-sm-12 col-md-4"> -->

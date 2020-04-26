@@ -22,5 +22,4 @@ urlpatterns = [
     path('post/<str:slug>', views.post, name='post-page'),
     path('archive', views.archive),
     path('category/<str:slug>', views.categoryview),
-    path('resume', views.resume),
 ]

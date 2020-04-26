@@ -1,6 +1,7 @@
 from django.db import models
 from django.conf import settings
 from ckeditor.fields import RichTextField
+from ckeditor_uploader.fields import RichTextUploadingField
 import jdatetime
 
 # Create your models here.
@@ -8,7 +9,7 @@ import jdatetime
 class Post(models.Model):
     title = models.CharField(max_length = 50, null = True)
     slug = models.SlugField(null = True, blank = False)
-    main_content = RichTextField(max_length = 2500, null = True)
+    main_content = RichTextUploadingField(max_length = 5000, null = True)
     summary = models.CharField(max_length = 350, null = True)
     image = models.ImageField(null = True, blank = True, upload_to = 'images/%Y/%m/%d/')
     category = models.ForeignKey("app_blog.Category", null = True, blank = False, on_delete=models.CASCADE)
